@@ -8,14 +8,25 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/search', (req, res, next) => {
-  const search = req.query;
+  const { search } = req.query;
   if (!search) res.render('search');
   else {
-    console.log('DEBUG search', search);
-    Celebrity.find({ name: new RegExp(search, 'ig') })
+    Celebrity.find({
+      $or: [
+        { name: new RegExp(search, 'i') }
+        // { occupation: new RegExp(search,"i")},
+      ]
+    })
       .then(celebrities => {
         res.render('search', {
-          celebrities: celebrities,
+          celebrities: celebrities
+            .map(c => ({
+              name: c.name,
+              occupation: c.occupation,
+              catchPhrase: c.catchPhrase,
+              score: 100 / (1 + c.name.toUpperCase().indexOf(search.toUpperCase()))
+            }))
+            .sort((a, b) => b.score - a.score),
           isNoResult: celebrities.length === 0
         });
       })
