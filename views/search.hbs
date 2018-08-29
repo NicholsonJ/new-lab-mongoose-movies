@@ -1,5 +1,14 @@
-<form action="/search" method="post">
+<form action="/search" method="get">
     Search: <input type="text" name="search"><br>
     <br>
     <button>Submit</button>
 </form>
+<ul>
+
+    {{#each celebrities}}
+    <li>
+        {{this.name}}
+    </li>
+    {{/each}}
+</ul>
+{{#if isNoResult}} No celebrities {{/if}}
