@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Celebrity = require('../models/Celebrity');
 const celebrities = require('../data/celebrities');
+const Movie = require('../models/Movie');
+const movies = require('../data/movies');
 
 mongoose.Promise = Promise;
 mongoose
@@ -15,16 +17,30 @@ mongoose
     console.error('Error connecting to mongo', err);
   });
 
-let celebritiesToCreate = celebrities.map(celebrity => {
+// let celebritiesToCreate = celebrities.map(celebrity => {
+//   return {
+//     name: celebrity.name,
+//     occupation: celebrity.occupation,
+//     catchPhrase: celebrity.catchPhrase
+//   };
+// });
+
+// console.log(celebritiesToCreate);
+
+// Celebrity.create(celebritiesToCreate).then(celebsFromDb => {
+//   console.log(celebsFromDb.length + ' celebrities were created');
+// });
+
+let moviesToCreate = movies.map(movie => {
   return {
-    name: celebrity.name,
-    occupation: celebrity.occupation,
-    catchPhrase: celebrity.catchPhrase
+    title: movie.title,
+    genre: movie.genre,
+    plot: movie.plot
   };
 });
 
-console.log(celebritiesToCreate);
+console.log(moviesToCreate);
 
-Celebrity.create(celebritiesToCreate).then(celebsFromDb => {
-  console.log(celebsFromDb.length + ' celebrities were created');
+Movie.create(moviesToCreate).then(moviesFromDb => {
+  console.log(moviesFromDb.length + ' movies were created');
 });
