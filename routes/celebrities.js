@@ -4,14 +4,14 @@ const Celebrity = require('../models/Celebrity');
 
 router.get('/', (req, res, next) => {
   Celebrity.find().then(celebrityFromDb => {
-    res.render('celebrities', {
+    res.render('Celebrity/celebrities', {
       celebrity: celebrityFromDb
     });
   });
 });
 
 router.get('/newCelebrity', (req, res, next) => {
-  res.render('newCelebrity');
+  res.render('Celebrity/newCelebrity');
 });
 
 router.post('/newCelebrity', (req, res, next) => {
@@ -20,7 +20,7 @@ router.post('/newCelebrity', (req, res, next) => {
   newCeleb
     .save()
     .then(celebrity => {
-      res.redirect('/celebrities');
+      res.redirect('Celebrity/celebrities');
     })
     .catch(error => {
       console.log(error);
@@ -35,7 +35,7 @@ router.post('/:id/delete', (req, res, next) => {
 
 router.get('/:id/edit', (req, res, next) => {
   Celebrity.findById(req.params.id).then(celebrityFromDb => {
-    res.render('editCelebrity', celebrityFromDb);
+    res.render('Celebrity/editCelebrity', celebrityFromDb);
   });
 });
 
@@ -53,7 +53,7 @@ router.post('/:id/edit', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   Celebrity.findById(req.params.id).then(celebrityFromDb => {
-    res.render('show', celebrityFromDb);
+    res.render('Celebrity/show', celebrityFromDb);
   });
 });
 
