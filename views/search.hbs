@@ -1,5 +1,35 @@
-<form action="/search" method="post">
+<form action="/search" method="get">
     Search: <input type="text" name="search"><br>
     <br>
     <button>Submit</button>
 </form>
+
+
+{{#if celebrities}}
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Occupation</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {{#each celebrities}}
+        <tr>
+            <td>{{this.name}} </td>
+            <td>{{this.occupation}} </td>
+            <td>{{this.score}}</td>
+        </tr>
+        {{/each}}
+        </tr>
+    </tbody>
+</table>
+{{/if}}
+
+{{#if isNoResult}}
+    No celebrities
+{{/if}}
+
+

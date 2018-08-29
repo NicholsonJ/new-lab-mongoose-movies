@@ -17,19 +17,19 @@ mongoose
     console.error('Error connecting to mongo', err);
   });
 
-// let celebritiesToCreate = celebrities.map(celebrity => {
-//   return {
-//     name: celebrity.name,
-//     occupation: celebrity.occupation,
-//     catchPhrase: celebrity.catchPhrase
-//   };
-// });
+let celebritiesToCreate = celebrities.map(celebrity => {
+  return {
+    name: celebrity.name,
+    occupation: celebrity.occupation,
+    catchPhrase: celebrity.catchPhrase
+  };
+});
 
-// console.log(celebritiesToCreate);
+console.log(celebritiesToCreate);
 
-// Celebrity.create(celebritiesToCreate).then(celebsFromDb => {
-//   console.log(celebsFromDb.length + ' celebrities were created');
-// });
+Celebrity.create(celebritiesToCreate).then(celebsFromDb => {
+  console.log(celebsFromDb.length + ' celebrities were created');
+});
 
 let moviesToCreate = movies.map(movie => {
   return {
